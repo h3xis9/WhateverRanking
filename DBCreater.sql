@@ -3,23 +3,43 @@ USE WR;
 
 /* 会員リスト */
 CREATE TABLE info_memberT(
-	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	email char(30) NOT NULL UNIQUE,
-	pw char(128) NOT NULL,
-	nickname char(20) NOT NULL,
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	email CHAR(30) NOT NULL UNIQUE,
+	pw CHAR(128) NOT NULL,
+	nickname CHAR(20) NOT NULL UNIQUE,
 	age TINYINT NOT NULL,
 	gender TINYINT NOT NULL
 );
 
+INSERT INTO info_memberT VALUES (
+	NULL,
+	'exp@me.com',
+	'1234',
+	'NickNameExample',
+	1,
+	0
+);
+
+INSERT INTO info_memberT VALUES (
+	NULL,
+	'root@root.com',
+	'root',
+	'rootHere',
+	2,
+	1
+);
+
 /* ランキング */
 CREATE TABLE rankingT(
-	rankingNo int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	rankingQuestion char(70) NOT NULL,
-	creatorId int NOT NULL REFERENCES info_memberT.id,
-	postDate timestamp DEFAULT CURRENT_TIMESTAMP
+	rankingNo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	rankingQuestion CHAR(70) NOT NULL,
+	creatorId INT NOT NULL REFERENCES info_memberT.id,
+	postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 /* ランキングに答えたユーザーやその答えの値 */
 CREATE TABLE answerT(
-
+	targetRankNo INT NOT NULL PRIMARY KEY REFERENCES rankingT.rankingNo,
+	responderID int NOT NULL REFERENCES info_memberT.id,
+	answer TINYINT NOT NULL
 );
