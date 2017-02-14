@@ -17,39 +17,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>index page</title>
 		
-		 
 		<link rel="stylesheet" type="text/css" href="css/style.css">
-		
-		 
-		<style>
-			
-			
-			body{
-				text-align:center;
-				width: 100%;
-				/*margin: 10% auto 10%;*/
-			}
-			
-			/*******/
-			.box_container{
-				width : 60%;
-				margin: 5% auto 0;
-				padding: 4%;
-				border : solid 1px grey;
-			}
-			
-			.err{
-				color:red;
-				width: 80%;
-				margin: 0 auto;
-			}
-		
-		</style>
 		
 	</head>
 	<body>
-	
-	
 	
 		<form method="post" action="LoginController">
 			

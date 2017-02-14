@@ -7,6 +7,27 @@
 	color: #525f66;
 }
 
+body{
+	text-align:center;
+	width: 100%;
+	/*margin: 10% auto 10%;*/
+}
+
+/*******/
+.box_container{
+	width : 60%;
+	margin: 5% auto 0;
+	padding: 4%;
+	border : solid 1px grey;
+}
+
+.err{
+	color:red;
+	width: 80%;
+	margin: 0 auto;
+}
+		
+
 small{
 	font-size:smaller;
 }
@@ -18,13 +39,17 @@ input[type="submit"] {
 	font-weight: bold;
 	height: 4em;
 	line-height: 4em;
-	width: 50%;
+	width: 60%;
 	display: block;/*ブロック要素として表示する*/
 	margin: 0 auto;/*センターに表示*/
 	text-align: center;
 	border-radius : 10px;
 	cursor: pointer;/*カーソルの変更*/
 	outline:none;/*クリック時の枠線を消す*/
+}
+
+input[type="password"] {
+	margin-top:10px;
 }
 
 .btn{
