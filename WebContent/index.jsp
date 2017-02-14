@@ -26,23 +26,20 @@
 			
 			body{
 				text-align:center;
-				
 				width: 100%;
-				margin: 30% 1% auto;
+				/*margin: 10% auto 10%;*/
 			}
 			
 			/*******/
 			.box_container{
-				width : 70%;
-				heigh : 20%;
-				margin: 0 auto;
+				width : 60%;
+				margin: 5% auto 0;
 				padding: 4%;
 				border : solid 1px grey;
 			}
 			
 			.err{
 				color:red;
-				
 				width: 80%;
 				margin: 0 auto;
 			}
@@ -76,7 +73,7 @@
 			</div>
 			
 			<div class="box_container">
-				<label for="reg">IDを持ってない方はこちら！１分で簡単登録！</label>
+				<label for="reg">IDを持ってない方はこちら！<br>１分で簡単登録！</label>
 				<br>
 				<div class="btn">
 					<input type="submit" id="reg" value="新規登録" name="reg">

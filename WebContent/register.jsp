@@ -28,6 +28,7 @@
 			
 			
 			dl {
+				display: inline;
 				border-bottom: 1px solid #eee;
 				padding: 2% 0;
 				margin: 0;
@@ -67,8 +68,9 @@
 				background: dodgerblue;
 			}
 		</style>
+		<script type="text/javascript" src="js/form_check.js"></script>
 		<script type="text/javascript">
-				
+			/*	
 			function formCheck(){
 			    
 			    //var flag = 0;
