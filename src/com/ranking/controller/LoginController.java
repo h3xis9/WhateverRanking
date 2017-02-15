@@ -73,7 +73,7 @@ public class LoginController extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				conn = DriverManager.getConnection(url);
 				st = conn.createStatement();
-				rs = st.executeQuery("select count(*) from info_member where email='" + inp_id
+				rs = st.executeQuery("select count(*) from info_memberT where email='" + inp_id
 						+ "' and pw='" + inp_pw + "';");
 				
 				rs.next();

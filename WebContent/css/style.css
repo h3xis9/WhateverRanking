@@ -55,3 +55,19 @@ input[type="password"] {
 .btn{
 	margin-top: 5%;
 }
+
+
+/* about chart */
+.container{
+	width: 90%;
+	margin: 0 auto;
+}
+
+.rank_container{
+	display: inline-block;
+	margin: 5%;
+}
+
+.myChart{
+	width: 120%;
+}
