@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ranking.dbconn.DBConnector;
+import com.ranking.dbconn.DBConn;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -34,15 +34,17 @@ public class LoginController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
-		DBConnector dbconn = new DBConnector();
+		DBConn dbconn = new DBConn();
 		
 		String fwrd = new String();
 		
 		HttpSession session = request.getSession();
 		
+		/*
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
+		*/
 		
 		String msg = "";
 		String err = "";
@@ -65,8 +67,8 @@ public class LoginController extends HttpServlet {
 			//TODO case2) IDがない場合の処理
 			//TODO case3) IDあり、PWが間違いない場合の処理
 			
-			String inp_id = request.getParameter("inp_id");
-			String inp_pw = request.getParameter("inp_pw");
+			String inp_id = (String)request.getParameter("inp_id");
+			String inp_pw = (String)request.getParameter("inp_pw");
 			
 			boolean loginCheck = dbconn.login(request, session, inp_id, inp_pw);
 			
