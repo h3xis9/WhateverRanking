@@ -23,6 +23,7 @@
 				<%=inp_pw %>
 			</div>
 			
+			<!-- 
 			<div class="container">
 			
 				<div class="rank_container">
@@ -100,6 +101,7 @@
 					</script>
 				</div>
 			</div>
+			-->
 			
 		</div>
 	</body>

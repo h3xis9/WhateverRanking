@@ -5,11 +5,10 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Insert title here</title>
-		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link rel="stylesheet" type="text/css" href="css/style_reg.css">
 		<style>
-			
-			
-			
+		/*
+
 			.form_style{
 				width: 90%;
 				padding: 12px;
@@ -33,17 +32,21 @@
 				padding: 2% 0;
 				margin: 0;
 			}
-			
+			*/
 			
 			/*　※マーク処理　*/
+			
+			/*
 			.bullet{
 				color: dodgerblue;
 				font-size: 1em;
 				font-weight: bold;
 			}
+			*/
 			
 			
 			/*送信ボタン*/
+			/*
 			.btn{
 				margin-top: 5%;
 			}
@@ -56,17 +59,18 @@
 				height: 5em;
 				line-height: 5em;
 				width: 50%;
-				display: block;/*ブロック要素として表示する*/
-				margin: 0 auto;/*センターに表示*/
+				display: block;
+				margin: 0 auto;
 				text-align: center;
 				border-radius : 10px;
-				cursor: pointer;/*カーソルの変更*/
-				outline:none;/*クリック時の枠線を消す*/
+				cursor: pointer;
+				outline:none;
 			}
 			
 			input[type="submit"]:hover {
 				background: dodgerblue;
 			}
+			*/
 		</style>
 		<script type="text/javascript" src="js/form_check.js"></script>
 		<script type="text/javascript">

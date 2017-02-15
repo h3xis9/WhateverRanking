@@ -1,10 +1,7 @@
 package com.ranking.controller;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -15,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.ranking.dbconn.DBConnector;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -35,9 +34,12 @@ public class LoginController extends HttpServlet {
 		
 		request.setCharacterEncoding("utf-8");
 		
+		DBConnector dbconn = new DBConnector();
+		
 		String fwrd = new String();
 		
 		HttpSession session = request.getSession();
+		
 		Connection conn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -66,6 +68,25 @@ public class LoginController extends HttpServlet {
 			String inp_id = request.getParameter("inp_id");
 			String inp_pw = request.getParameter("inp_pw");
 			
+			boolean loginCheck = dbconn.login(request, session, inp_id, inp_pw);
+			
+			if( loginCheck == true ){
+				
+				//ログイン成功
+				session.setAttribute("LOGINUSERID", inp_id);
+				request.setAttribute("inp_id", inp_id);
+				request.setAttribute("inp_pw", inp_pw);
+				fwrd = "myPage.jsp";
+				
+			}else{
+				
+				//ログイン失敗
+				//ログインページに戻し、エラーメッセージを表示
+				request.setAttribute("err", "ユーザIDもしくは、パスワードに間違いがあります！");
+				fwrd = "index.jsp";
+			};
+			
+			/*
 			String url="jdbc:mysql:///wr?user=root&useUnicode=true&characterEncoding=utf8";
 			
 			try{
@@ -101,7 +122,8 @@ public class LoginController extends HttpServlet {
 			}catch(Exception e){
 				request.setAttribute("err", e.getMessage());
 			}
-				
+			*/
+			
 			//TODO セッションを利用し、ログイン状態にする
 			//request.setAttribute("inp_id", request.getParameter("inp_id"));
 			//request.setAttribute("inp_pw", request.getParameter("inp_pw"));

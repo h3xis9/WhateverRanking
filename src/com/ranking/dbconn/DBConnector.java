@@ -9,7 +9,7 @@ import java.sql.Statement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-public class DbConnector {
+public class DBConnector {
 	
 	String url;
 	
@@ -17,7 +17,7 @@ public class DbConnector {
 	Statement st;
 	ResultSet rs;
 	
-	protected DbConnector(){
+	public DBConnector(){
 		
 		this.url="jdbc:mysql:///wr?user=root&useUnicode=true&characterEncoding=utf8";
 		
