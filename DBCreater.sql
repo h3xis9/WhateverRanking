@@ -8,25 +8,31 @@ CREATE TABLE info_memberT(
 	pw CHAR(128) NOT NULL,
 	nickname CHAR(20) NOT NULL UNIQUE,
 	age TINYINT NOT NULL,
-	gender TINYINT NOT NULL
+	gender TINYINT NOT NULL,
+	point INT NOT NULL DEFAULT 10,
+	profileImg BLOB
 );
 
 INSERT INTO info_memberT VALUES (
-	NULL,
+	DEFAULT,
 	'exp@me.com',
 	'1234',
 	'NickNameExample',
 	1,
-	0
+	0,
+	DEFAULT,
+	NULL
 );
 
 INSERT INTO info_memberT VALUES (
-	NULL,
+	DEFAULT,
 	'root@root.com',
 	'root',
 	'rootHere',
 	2,
-	1
+	1,
+	DEFAULT,
+	NULL
 );
 
 /* ランキング */
