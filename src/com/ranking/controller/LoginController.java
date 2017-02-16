@@ -83,7 +83,7 @@ public class LoginController extends HttpServlet {
 				
 				//ログイン失敗
 				//ログインページに戻し、エラーメッセージを表示
-				request.setAttribute("err", "ユーザIDもしくは、パスワードに間違いがあります！");
+				request.setAttribute("err", "IDもしくは、パスワードに間違いがあります！");
 				fwrd = "index.jsp";
 			}
 			

@@ -7,7 +7,7 @@
 		if(request.getAttribute("ready") != null){
 			if((boolean)request.getAttribute("ready") == false){
 				
-				err = "DBサーバーが応答しません。";
+				err = "DBサーバーがオフラインです。";
 				
 			}else if((boolean)request.getAttribute("ready") == true &&
 					request.getAttribute("err") != null){
@@ -41,13 +41,14 @@
 				<input type="password" id="inp_pw" name="inp_pw">
 				
 				<br>
+				<p class="err"> <br><%=err %> </p>
 				<div class="btn">
 					<input type="submit" class="btn" value="ログイン">
 				</div>
 			</div>
 			
 			<div>
-				<p class="err"> <%=err %> </p>
+				
 			</div>
 			
 			<div class="box_container">

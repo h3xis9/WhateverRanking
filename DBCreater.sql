@@ -11,18 +11,18 @@ USE WR;
 
 
 /* 会員リスト */
-CREATE TABLE info_memberT(
+CREATE TABLE userT(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	email CHAR(30) NOT NULL UNIQUE,
 	pw CHAR(128) NOT NULL,
 	nickname CHAR(20) NOT NULL UNIQUE,
-	age TINYINT NOT NULL,
-	gender TINYINT NOT NULL,
+	age TINYINT NOT NULL,	/* 1=10代, 2=20代, 3=30代, 4=40代, 5=50代以上*/
+	gender TINYINT NOT NULL,	/* 0=男　1=女 */
 	point INT NOT NULL DEFAULT 10,
 	profileImg BLOB
 );
 
-INSERT INTO info_memberT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (
 	DEFAULT,
 	'exp@me.com',
 	'1234',
@@ -33,11 +33,22 @@ INSERT INTO info_memberT (id, email, pw, nickname, age, gender, point, profileIm
 	NULL
 );
 
-INSERT INTO info_memberT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (
 	DEFAULT,
 	'root@root.com',
 	'root',
 	'rootHere',
+	2,
+	1,
+	DEFAULT,
+	NULL
+);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (
+	DEFAULT,
+	'user@user.com',
+	'user',
+	"I'm dummy",
 	2,
 	1,
 	DEFAULT,
@@ -53,8 +64,8 @@ CREATE TABLE rankingT(
 	rankingReward INT NOT NULL, /* Domain: 1~3, decided rank cost by this point */
 	creatorId INT NOT NULL,
 	postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT fk_PerOrders FOREIGN KEY (creatorID)
-	REFERENCES info_memberT(id)
+	CONSTRAINT fk_PerUser FOREIGN KEY (creatorID)
+	REFERENCES userT(id)
 );
 
 
@@ -79,6 +90,8 @@ INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorId, post
 /* ランキングに答えたユーザーやその答えの値 */
 CREATE TABLE answerT(
 	targetRankNo INT NOT NULL PRIMARY KEY REFERENCES rankingT.rankingNo,
-	responderID int NOT NULL REFERENCES info_memberT.id,
-	answer TINYINT NOT NULL
+	responderID INT NOT NULL,
+	answer TINYINT NOT NULL,
+	CONSTRAINT fk_PerRanking FOREIGN KEY (responderID)
+	REFERENCES userT(id)
 );

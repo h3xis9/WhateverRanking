@@ -20,7 +20,7 @@ public class DBConn {
 	String errMsg;
 	
 	public DBConn(){
-		this.url="jdbc:mysql:///wr?useSSL=true&user=root&useUnicode=true&characterEncoding=utf8";
+		this.url="jdbc:mysql:///wr?useSSL=false&user=root&useUnicode=true&characterEncoding=utf8";
 		
 		this.conn = null;
 		this.st = null;
@@ -30,16 +30,28 @@ public class DBConn {
 	
 	public boolean dbReady(){
 		try{
+			
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url);
 			st = conn.createStatement();
 			return true;
+			
 		}catch(Exception e){
+			
 			errMsg += e.getMessage();
 			return false;
+			
+		}finally{
+			
+			try{
+				
+				if(conn != null) conn.close();
+				if(st != null) st.close();
+				
+			}catch(SQLException se){
+				se.getMessage();
+			}
 		}
-		
-		
 	}
 	
 	//ログイン処理
@@ -52,23 +64,26 @@ public class DBConn {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url);
 			st = conn.createStatement();
-			
-			rs = st.executeQuery("select count(*) from info_memberT where email='" + inp_id
+			rs = st.executeQuery("select count(*) from userT where email='" + inp_id
 					+ "' and pw='" + inp_pw + "';");
 			rs.next();
-			loginCheck = rs.getInt("count(*)")==1? true : false;
+			
+			loginCheck = rs.getInt("count(*)")==1 ? true : false;
 
 			
 		}catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			
+		}finally{
+			try{
+				if(conn != null) conn.close();
+				if(st != null) st.close();
+			}catch(SQLException se){
+				se.getMessage();
+			}
 		}
 		
 		if(loginCheck){
 			//ログイン成功
-			
-			
 			return loginCheck;
 		}else{
 			//ログイン失敗
