@@ -105,7 +105,7 @@ CREATE TABLE answerT(
 	targetRankNo INT NOT NULL,
 	responderID INT NOT NULL,
 	answer TINYINT NOT NULL,	/* 0=NO, 1=YES */
-	CONSTRAINT fk_targetRank FOREIGN KEY (targetRankNo)
+	CONSTRAINT fk_whichRankUserAnswer FOREIGN KEY (targetRankNo)
 	REFERENCES rankingT(rankingNo),
 	CONSTRAINT fk_whoAnswerThis FOREIGN KEY (responderID)
 	REFERENCES userT(id)

@@ -74,9 +74,6 @@ public class LoginController extends HttpServlet {
 				//ログイン成功
 				session.setAttribute("USERID", inp_id);
 				
-				request.setAttribute("inp_id", inp_id);
-				request.setAttribute("inp_pw", inp_pw);
-				
 				fwrd = "myPage.jsp";
 				
 			}else{

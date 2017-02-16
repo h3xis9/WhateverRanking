@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String inp_id = (String)request.getAttribute("inp_id");
-	String inp_pw = (String)request.getAttribute("inp_pw");
+	String userID = (String)session.getAttribute("USERID");
 	
 	boolean ready = (boolean)request.getAttribute("ready");
 %>
@@ -20,11 +19,9 @@
 			<div class="container">
 				login.jsp here!
 				<br>
-				<%=inp_id %>
+				userID:<%=userID %>
 				<br>
-				<%=inp_pw %>
-				<br>
-				<%=ready %>
+				db_ready:<%=ready %>
 			</div>
 			
 			
@@ -98,6 +95,12 @@
 					</script>
 				</div>
 			</div>
+			
+			<footer>
+				<form method="post" action="LogoutController">
+					<input type="submit" class="btn" name="LOGOUT" value="ログアウト">			
+				</form>
+			</footer>
 			
 		</div>
 	</body>
