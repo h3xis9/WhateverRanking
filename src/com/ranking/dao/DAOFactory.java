@@ -1,27 +1,23 @@
 package com.ranking.dao;
 
 public class DAOFactory {
-	private static DAOFactory instance = null;
 	
-	protected DAOFactory(){
-		
-	}
+	private static RankingDAO rankingDAO = null;
+	private static UserDAO userDAO = null;
 	
-	public static DAOFactory getInstance(){
-		if(instance == null){
-			instance = new DAOFactory();
+	
+	public static UserDAO getUserDAO(){
+		if(userDAO == null){
+			userDAO = new UserDAO();
 		}
-		return instance;
+		return userDAO;
 	}
 	
-	public UserDAO getUserDAO(){
-		UserDAO ud = new UserDAO();
-		return ud;
-	}
-	
-	public RankingDAO getRankingDAO(){
-		RankingDAO rd = new RankingDAO();
-		return rd;
+	public static RankingDAO getRankingDAO(){
+		if(rankingDAO == null){
+			rankingDAO = new RankingDAO();
+		}
+		return rankingDAO;
 	}
 
 }

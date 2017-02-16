@@ -1,39 +1,87 @@
 package com.ranking.dbconn;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
 public class DBConn {
 	
-	String url;
+    private static Connection conn = null;
 	
-	Connection conn;
-	Statement st;
-	ResultSet rs;
-	
-	String errMsg;
-	
-	public DBConn(){
-		this.url="jdbc:mysql:///wr?useSSL=false&user=root&useUnicode=true&characterEncoding=utf8";
-		
-		this.conn = null;
-		this.st = null;
-		this.rs = null;
-		this.errMsg = null;
+	private DBConn(){
+
 	}
 	
+	public static Connection getConnection(){
+		if (conn != null){
+            return conn;
+		}else {
+            try {
+                Properties prop = new Properties();
+                InputStream inputStream = DBConn.class.getClassLoader().getResourceAsStream("/db.properties");
+                prop.load(inputStream);
+                String driver = prop.getProperty("driver");
+                String url = prop.getProperty("url");
+                String user = prop.getProperty("user");
+                String password = prop.getProperty("password");
+                
+                Class.forName(driver);
+                
+                conn = DriverManager.getConnection(url, user, password);
+                
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return conn;
+        }
+	}
+	
+	public static boolean checkConnection(){
+		
+		try {
+			if(conn != null){
+				return conn.isValid(5);
+			}else{
+				Properties prop = new Properties();
+                InputStream inputStream = DBConn.class.getClassLoader().getResourceAsStream("/db.properties");
+                prop.load(inputStream);
+                String driver = prop.getProperty("driver");
+                String url = prop.getProperty("url");
+                String user = prop.getProperty("user");
+                String password = prop.getProperty("password");
+                
+                Class.forName(driver);
+                
+                conn = DriverManager.getConnection(url, user, password);
+				return true;
+			}
+		} catch (SQLException|IOException|ClassNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	/*
 	public boolean dbReady(){
 		try{
 			
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url);
-			st = conn.createStatement();
+			Connection test = DriverManager.getConnection(url);
+			st = test.createStatement();
 			return true;
 			
 		}catch(Exception e){
@@ -44,8 +92,6 @@ public class DBConn {
 		}finally{
 			
 			try{
-				
-				if(conn != null) conn.close();
 				if(st != null) st.close();
 				
 			}catch(SQLException se){
@@ -53,43 +99,8 @@ public class DBConn {
 			}
 		}
 	}
+	*/
 	
-	//ログイン処理
-	public boolean login(String inp_id, String inp_pw){
-		
-		boolean loginCheck = false;
-		
-		try {
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(url);
-			st = conn.createStatement();
-			rs = st.executeQuery("select count(*) from userT where email='" + inp_id
-					+ "' and pw='" + inp_pw + "';");
-			rs.next();
-			
-			loginCheck = rs.getInt("count(*)")==1 ? true : false;
-
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			try{
-				if(conn != null) conn.close();
-				if(st != null) st.close();
-			}catch(SQLException se){
-				se.getMessage();
-			}
-		}
-		
-		if(loginCheck){
-			//ログイン成功
-			return loginCheck;
-		}else{
-			//ログイン失敗
-			return loginCheck;
-		}
-	}
 	
 	
 	//DBからデータを読み込む

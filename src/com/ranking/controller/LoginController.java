@@ -1,6 +1,7 @@
 package com.ranking.controller;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -14,42 +15,28 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ranking.dbconn.DBConn;
+import com.ranking.dao.DAOFactory;
+import com.ranking.model.UserBean;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-     
-	/*
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//XXX
-		resp.getWriter().append("Served at: ").append(req.getContextPath())
-		.append((String)req.getParameter("reg"))
-		.append((String)req.getParameter("inp_id"))
-		.append((String)req.getParameter("inp_pw"));
-	}
-	*/
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-		
-		DBConn dbconn = new DBConn();
-		
+				
 		String fwrd = new String();
 		
 		HttpSession session = request.getSession();
 		
+		String user_id = (String) session.getAttribute("USERID");
 		
-		String msg = "";
-		String err = "";
-		
-		request.setAttribute("ready", dbconn.dbReady());
+		DBConn.getConnection();
 		
 		
-		if(!msg.isEmpty()){
-			//TODO 既にログインされてる場合の処理、sessionを利用
-			
+		if(user_id != null && !user_id.isEmpty()){
+			fwrd = "myPage.jsp";
 			
 		}else if(request.getParameter("reg") != null){	//TODO 「ログインされてない状態」を条件に追加
 			
@@ -67,7 +54,8 @@ public class LoginController extends HttpServlet {
 			String inp_id = (String)request.getParameter("inp_id");
 			String inp_pw = (String)request.getParameter("inp_pw");
 			
-			boolean loginCheck = dbconn.login(inp_id, inp_pw);
+			boolean loginCheck = DAOFactory.getUserDAO().loginCheck(new UserBean(inp_id,inp_pw));
+			
 			
 			if( loginCheck == true ){
 				
