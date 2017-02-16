@@ -10,7 +10,7 @@ USE WR;
 
 
 
-/* 会員リスト */
+/* 会員T */
 CREATE TABLE userT(
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	email CHAR(30) NOT NULL UNIQUE,
@@ -44,27 +44,39 @@ INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALU
 	NULL
 );
 
-INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (
-	DEFAULT,
-	'user@user.com',
-	'user',
-	"I'm dummy",
-	2,
-	1,
-	DEFAULT,
-	NULL
-);
+/* male dummies by ages */
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'m1@10.com','m110',"10代男dummy1",1,0,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'m1@20.com','m120',"20代男dummy1",2,0,DEFAULT,NULL);
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'m2@20.com','m220',"20代男dummy2",2,0,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'m1@30.com','m130',"30代男dummy1",3,0,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'m1@40.com','m140',"40代男dummy1",4,0,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'m1@50.com','m150',"50代男dummy1",5,0,DEFAULT,NULL);
+
+
+/* female dummies by ages */
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'f1@10.com','f110',"10代女dummy1",1,1,DEFAULT,NULL);
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'f2@10.com','f210',"10代女dummy2",1,1,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'f1@20.com','f120',"20代女dummy1",2,1,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'f1@30.com','f130',"30代女dummy1",3,1,DEFAULT,NULL);
+
+INSERT INTO userT (id, email, pw, nickname, age, gender, point, profileImg) VALUES (DEFAULT,'f1@40.com','f140',"40代女dummy1",4,1,DEFAULT,NULL);
 
 
 
-/* ランキング */
+/* ランキングT */
 CREATE TABLE rankingT(
 	rankingNo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	rankingQuestion CHAR(70) NOT NULL,
 	rankingReward INT NOT NULL, /* Domain: 1~3, decided rank cost by this point */
 	creatorId INT NOT NULL,
 	postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	CONSTRAINT fk_PerUser FOREIGN KEY (creatorID)
+	CONSTRAINT fk_whoMadeThis FOREIGN KEY (creatorID)
 	REFERENCES userT(id)
 );
 
@@ -87,11 +99,37 @@ INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorId, post
 
 
 
-/* ランキングに答えたユーザーやその答えの値 */
+/* ランキングに答えたユーザーやその答え */
 CREATE TABLE answerT(
-	targetRankNo INT NOT NULL PRIMARY KEY REFERENCES rankingT.rankingNo,
+	answerId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	targetRankNo INT NOT NULL,
 	responderID INT NOT NULL,
-	answer TINYINT NOT NULL,
-	CONSTRAINT fk_PerRanking FOREIGN KEY (responderID)
+	answer TINYINT NOT NULL,	/* 0=NO, 1=YES */
+	CONSTRAINT fk_targetRank FOREIGN KEY (targetRankNo)
+	REFERENCES rankingT(rankingNo),
+	CONSTRAINT fk_whoAnswerThis FOREIGN KEY (responderID)
 	REFERENCES userT(id)
 );
+
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 3, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 4, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 5, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 6, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 7, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 8, 0);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 9, 0);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 10, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 11, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 12, 0);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (1, 13, 0);
+
+
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 3, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 4, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 5, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 6, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 7, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 9, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 10, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 11, 1);
+INSERT INTO answerT (targetRankNo, responderID, answer) VALUES (2, 12, 0);
