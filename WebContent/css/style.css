@@ -16,7 +16,7 @@ body{
 /*******/
 .box_container{
 	width : 60%;
-	margin: 5% auto 0;
+	margin: 3% auto;
 	padding: 4%;
 	border : solid 1px grey;
 }

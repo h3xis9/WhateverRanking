@@ -1,5 +1,14 @@
-CREATE DATABASE WR;
+
+
+/*** windows command line使用時、CHCP　９３２（SHIFT-JIS）確認　***/
+
+CREATE DATABASE wr
+	DEFAULT CHARACTER SET utf8
+	DEFAULT COLLATE utf8_general_ci;
+  
 USE WR;
+
+
 
 /* 会員リスト */
 CREATE TABLE info_memberT(
@@ -35,6 +44,8 @@ INSERT INTO info_memberT (id, email, pw, nickname, age, gender, point, profileIm
 	NULL
 );
 
+
+
 /* ランキング */
 CREATE TABLE rankingT(
 	rankingNo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -62,6 +73,8 @@ INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorId, post
 	1,
 	DEFAULT
 );
+
+
 
 /* ランキングに答えたユーザーやその答えの値 */
 CREATE TABLE answerT(

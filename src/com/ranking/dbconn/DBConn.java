@@ -17,16 +17,33 @@ public class DBConn {
 	Statement st;
 	ResultSet rs;
 	
+	String errMsg;
+	
 	public DBConn(){
-		this.url="jdbc:mysql:///wr?user=root&useUnicode=true&characterEncoding=utf8";
+		this.url="jdbc:mysql:///wr?useSSL=true&user=root&useUnicode=true&characterEncoding=utf8";
 		
 		this.conn = null;
 		this.st = null;
 		this.rs = null;
+		this.errMsg = null;
+	}
+	
+	public boolean dbReady(){
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url);
+			st = conn.createStatement();
+			return true;
+		}catch(Exception e){
+			errMsg += e.getMessage();
+			return false;
+		}
+		
+		
 	}
 	
 	//ログイン処理
-	public boolean login(HttpServletRequest r, HttpSession session, String inp_id, String inp_pw){
+	public boolean login(String inp_id, String inp_pw){
 		
 		boolean loginCheck = false;
 		
@@ -42,15 +59,15 @@ public class DBConn {
 			loginCheck = rs.getInt("count(*)")==1? true : false;
 
 			
-		} catch (SQLException se) {
-			se.printStackTrace();
-		} catch (Exception e) {
+		}catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			
 		}
 		
 		if(loginCheck){
 			//ログイン成功
-			session.setAttribute("USERID", inp_id);
+			
 			
 			return loginCheck;
 		}else{

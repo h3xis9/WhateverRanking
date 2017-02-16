@@ -2,9 +2,18 @@
 	pageEncoding="utf-8"%>
 	
 	<%
-		String err = "";
-		if(request.getAttribute("err") != null){
-			err = (String)request.getAttribute("err");	
+		String err = "";		
+
+		if(request.getAttribute("ready") != null){
+			if((boolean)request.getAttribute("ready") == false){
+				
+				err = "DBサーバーが応答しません。";
+				
+			}else if((boolean)request.getAttribute("ready") == true &&
+					request.getAttribute("err") != null){
+				
+				err = (String)request.getAttribute("err");
+			}
 		};
 	%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -38,7 +47,7 @@
 			</div>
 			
 			<div>
-				<br><p class="err"> <%=err %> </p><br>
+				<p class="err"> <%=err %> </p>
 			</div>
 			
 			<div class="box_container">
