@@ -3,11 +3,11 @@
 	
 <%
 	String err = "";		
-
 	//ログイン状態でindex.jspに訪問した時の処理
-	//if(session.getAttribute("USERID") != null){
-	//	pageContext.forward("myPage.jsp");
-	//}
+	if(session.getAttribute("USERID") != null){
+		//err += session.getAttribute("USERID");
+		pageContext.forward("myPage.jsp");
+	}
 	
 	//DBが「オフライン」なのか、それとも、「通信は成功したけどエラー」なのかの判別処理
 	if(request.getAttribute("ready") != null){
