@@ -8,9 +8,6 @@
 	if(session.getAttribute("USERID") != null){
 		userID = (String)session.getAttribute("USERID");
 	}
-	if(request.getAttribute("ready") != null){
-		ready = (boolean)request.getAttribute("ready");	
-	}
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -29,7 +26,6 @@
 				<br>
 				userID:<%=userID %>
 				<br>
-				db_ready:<%=ready %>
 			</div>
 			
 			

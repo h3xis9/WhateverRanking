@@ -2,10 +2,6 @@ package com.ranking.controller;
 
 import java.io.IOException;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ranking.dbconn.DBConn;
 import com.ranking.dao.DAOFactory;
 import com.ranking.model.UserBean;
 
@@ -30,10 +25,7 @@ public class LoginController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		String user_id = (String) session.getAttribute("USERID");
-		
-		DBConn.getConnection();
-		
+		String user_id = (String) session.getAttribute("USERID");		
 		
 		if(user_id != null && !user_id.isEmpty()){
 			fwrd = "myPage.jsp";
@@ -61,7 +53,6 @@ public class LoginController extends HttpServlet {
 				
 				//ログイン成功
 				session.setAttribute("USERID", inp_id);
-				
 				fwrd = "myPage.jsp";
 				
 			}else{
@@ -87,9 +78,6 @@ public class LoginController extends HttpServlet {
 		
 		RequestDispatcher disp = request.getRequestDispatcher(fwrd);
 		disp.forward(request, response);
-		
-		
-		
 		
 	}
 
