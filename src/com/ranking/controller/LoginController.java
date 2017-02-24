@@ -28,7 +28,7 @@ public class LoginController extends HttpServlet {
 		String user_id = (String) session.getAttribute("USERID");		
 		
 		if(user_id != null && !user_id.isEmpty()){
-			fwrd = "myPage.jsp";
+			//fwrd = "myPage.jsp";
 			
 		}else if(request.getParameter("reg") != null){	//TODO 「ログインされてない状態」を条件に追加
 			
@@ -53,7 +53,7 @@ public class LoginController extends HttpServlet {
 				
 				//ログイン成功
 				session.setAttribute("USERID", inp_id);
-				fwrd = "myPage.jsp";
+				fwrd = "rankingController";
 				
 			}else{
 				

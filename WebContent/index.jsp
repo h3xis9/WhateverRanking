@@ -11,9 +11,7 @@
 	
 	//DBが「オフライン」なのか、それとも、「通信は成功したけどエラー」なのかの判別処理
 	if(request.getAttribute("err") != null){
-			
 			err = (String)request.getAttribute("err");
-			
 	};
 	
 	

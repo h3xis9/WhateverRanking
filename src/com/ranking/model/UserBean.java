@@ -9,7 +9,6 @@ public class UserBean {
 	private String pw;
 	private String nickname;
 
-
 	private int gender;
 	private int age;
 	
@@ -20,16 +19,16 @@ public class UserBean {
 	}
 	
 	public UserBean(String email, String pw){
-		this.email = email;
-		this.pw = pw;
+		setEmail(email);
+		setPw(pw);
 	}
 	
 	public UserBean(int id, String email, String pw, String nickname, int gender, int age, int point){
-		this.id = id;
-		this.pw = pw;
-		this.gender = gender;
-		this.age = age;
-		this.email = email;
+		setId(id);
+		setPw(pw);
+		setGender(gender);
+		setNickname(nickname);
+		setEmail(email);
 	}
 	
 	

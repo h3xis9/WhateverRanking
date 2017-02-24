@@ -1,11 +1,14 @@
-
+/* TODO
+ * インデックスの追加
+ * 
+ */
 
 /*** windows command line使用時、CHCP　９３２（SHIFT-JIS）確認　***/
 
 CREATE DATABASE wr
 	DEFAULT CHARACTER SET utf8
 	DEFAULT COLLATE utf8_general_ci;
-  
+
 USE WR;
 
 
@@ -74,14 +77,14 @@ CREATE TABLE rankingT(
 	rankingNo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	rankingQuestion CHAR(70) NOT NULL,
 	rankingReward INT NOT NULL, /* Domain: 1~3, decided rank cost by this point */
-	creatorId INT NOT NULL,
+	creatorID INT NOT NULL,
 	postDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	CONSTRAINT fk_whoMadeThis FOREIGN KEY (creatorID)
 	REFERENCES userT(id)
 );
 
 
-INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorId, postDate) VALUES (
+INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorID, postDate) VALUES (
 	DEFAULT,
 	'ラーメンを一週間一回以上食べる人！',
 	1,
@@ -89,7 +92,7 @@ INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorId, post
 	DEFAULT
 );
 
-INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorId, postDate) VALUES (
+INSERT INTO rankingT (rankingNo, rankingQuestion, rankingReward, creatorID, postDate) VALUES (
 	DEFAULT,
 	'自分は一日一回以上、SNSの確認をする。',
 	3,

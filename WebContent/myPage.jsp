@@ -1,12 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*"%>
+    pageEncoding="UTF-8" import="java.util.*, com.ranking.model.RankingBean"%>
 <%
 	
 	String userID=null;
+
 	boolean ready=false;
+	
+	int howManyRankExist = -1;
+	ArrayList<RankingBean> rankList = null;
 	
 	if(session.getAttribute("USERID") != null){
 		userID = (String)session.getAttribute("USERID");
+	}
+	
+	if(session.getAttribute("rankList") != null){
+		rankList = (ArrayList<RankingBean>) session.getAttribute("rankList");
+		howManyRankExist = rankList.size();
+		
+		for(int i=0; i < howManyRankExist; i++){
+			RankingBean rank = (RankingBean) rankList.get(i);
+			rank.getRankingNo();
+			rank.getRankingQuestion();
+			rank.getCreatorId();
+			rank.getPostDate();
+			rank.getRankingReward();
+		}
 	}
 	
 %>
@@ -26,11 +44,27 @@
 				<br>
 				userID:<%=userID %>
 				<br>
+				howManyRankExist:<%=howManyRankExist %>
+				<br>
+				rankList:
 			</div>
 			
+			<%
+			if(howManyRankExist != -1){
+				for(int i=0; i < howManyRankExist; i++){
+					RankingBean rank = (RankingBean) rankList.get(i);
+					out.println(rank.getRankingNo());
+					out.println(rank.getRankingQuestion());
+					out.println(rank.getCreatorId());
+					out.println(rank.getPostDate());
+					out.println(rank.getRankingReward());
+					out.println("<br>");
+				}
+			}
+			
+			%>
 			
 			<div class="container">
-			
 				<div class="rank_container">
 					<canvas id="myChart0" class="myChart"></canvas>
 					<script>

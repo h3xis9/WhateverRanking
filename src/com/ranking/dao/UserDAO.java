@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,10 +24,10 @@ public class UserDAO {
 	
 	
 	public UserBean getUserById(String email) {
-        UserBean user = new UserBean();
+		UserBean user = new UserBean();
         try {
             PreparedStatement preparedStatement = conn.
-                    prepareStatement("select * from users where email=?");
+                    prepareStatement("select * from userT where email=?");
             preparedStatement.setString(1, email);
             ResultSet rs = preparedStatement.executeQuery();
 

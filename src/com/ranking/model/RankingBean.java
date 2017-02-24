@@ -5,9 +5,61 @@ import java.util.List;
 
 public class RankingBean {
 
-	//選択肢変数
-	private List<?> option;
-	private String question;
-	private Timestamp createTime;
-	private Timestamp updateTime;
+	private int rankingNo;
+	private String rankingQuestion;
+	private byte rankingReward;
+	private int creatorId;
+	private Timestamp postDate;
+	
+	public RankingBean(){
+		
+	}
+	
+	public RankingBean(int rankingNo){
+		setRankingNo(rankingNo);
+	}
+		
+	
+	/* getter & setter */
+	public int getRankingNo() {
+		return rankingNo;
+	}
+
+	public void setRankingNo(int rankingNo) {
+		this.rankingNo = rankingNo;
+	}
+
+	public String getRankingQuestion() {
+		return rankingQuestion;
+	}
+
+	public void setRankingQuestion(String rankingQuestion) {
+		this.rankingQuestion = rankingQuestion;
+	}
+
+	public byte getRankingReward() {
+		return rankingReward;
+	}
+
+	public void setRankingReward(byte rankingReward) {
+		this.rankingReward = rankingReward;
+	}
+
+	public int getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(int creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public Timestamp getPostDate() {
+		return postDate;
+	}
+
+	public void setPostDate(Timestamp postDate) {
+		this.postDate = postDate;
+	}
+	
+	
 }
