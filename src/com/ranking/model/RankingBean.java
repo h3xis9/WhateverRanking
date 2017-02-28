@@ -1,6 +1,7 @@
 package com.ranking.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RankingBean {
@@ -11,6 +12,9 @@ public class RankingBean {
 	private int creatorId;
 	private Timestamp postDate;
 	
+	private ArrayList<AnswerBean> answerList;
+	
+	
 	public RankingBean(){
 		
 	}
@@ -19,7 +23,6 @@ public class RankingBean {
 		setRankingNo(rankingNo);
 	}
 		
-	
 	/* getter & setter */
 	public int getRankingNo() {
 		return rankingNo;
@@ -61,5 +64,12 @@ public class RankingBean {
 		this.postDate = postDate;
 	}
 	
+	public ArrayList<AnswerBean> getAnswerList() {
+		return answerList;
+	}
+
+	public void setAnswerList(ArrayList<AnswerBean> answerList) {
+		this.answerList = answerList;
+	}
 	
 }

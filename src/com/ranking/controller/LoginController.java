@@ -20,11 +20,10 @@ public class LoginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
-				
-		String fwrd = new String();
 		
 		HttpSession session = request.getSession();
 		
+		String fwrd = new String();
 		String user_id = (String) session.getAttribute("USERID");		
 		
 		if(user_id != null && !user_id.isEmpty()){

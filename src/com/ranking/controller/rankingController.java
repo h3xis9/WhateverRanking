@@ -23,11 +23,13 @@ public class rankingController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		String userID = (String)session.getAttribute("USERID");
-		ArrayList<RankingBean> rankList = (ArrayList<RankingBean>) (DAOFactory.getRankingDAO().getRankingByID(userID));
+		ArrayList<RankingBean> rankList = (ArrayList<RankingBean>) (DAOFactory.getRankingDAO().getRankingByIdWithAnswers(userID));
+		
 		
 		if(rankList != null){
 			session.setAttribute("rankList", rankList);
 		}
+		
 		
 		RequestDispatcher disp = request.getRequestDispatcher("myPage.jsp");
 		disp.forward(request, response);

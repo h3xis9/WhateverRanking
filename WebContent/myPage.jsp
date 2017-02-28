@@ -17,6 +17,7 @@
 		rankList = (ArrayList<RankingBean>) session.getAttribute("rankList");
 		howManyRankExist = rankList.size();
 		
+		/*
 		for(int i=0; i < howManyRankExist; i++){
 			RankingBean rank = (RankingBean) rankList.get(i);
 			rank.getRankingNo();
@@ -25,6 +26,7 @@
 			rank.getPostDate();
 			rank.getRankingReward();
 		}
+		*/
 	}
 	
 %>
@@ -46,6 +48,7 @@
 				<br>
 				howManyRankExist:<%=howManyRankExist %>
 				<br>
+				<br>
 				rankList:
 			</div>
 			
@@ -58,6 +61,15 @@
 					out.println(rank.getCreatorId());
 					out.println(rank.getPostDate());
 					out.println(rank.getRankingReward());
+					
+					int howManyAnswerExist = -1;
+					if(rank.getAnswerList() != null && rank.getAnswerList().size() != 0){
+						howManyAnswerExist = rank.getAnswerList().size();
+						out.print("<br>howManyAnswerExsit:"+howManyAnswerExist+"<br>");
+						for(int j=0; j < howManyAnswerExist; j++){
+							out.println(rank.getAnswerList().get(j).getAnswer()+"<br>");
+						}
+					}
 					out.println("<br>");
 				}
 			}
