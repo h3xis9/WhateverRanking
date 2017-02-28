@@ -1,3 +1,17 @@
 # WhateverRanking
+====================
 
-- Using Chart.js / Servlet / Tomcat / MySQL 
+
+- WEB Application / Ranking Sharing System 
+- Using Chart.js / Servlet / Tomcat / MySQL
+
+Features:
+====================
+
+
+How to install:
+====================
+
+
+Motivation:
+====================
