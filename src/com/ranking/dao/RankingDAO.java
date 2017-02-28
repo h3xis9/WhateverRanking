@@ -46,6 +46,7 @@ public class RankingDAO {
 	}
 	
 	public List<RankingBean> getRankingByIdWithAnswers(String email){
+		
 		ArrayList<RankingBean> rankArr = new ArrayList<RankingBean>();
 		
 		try {
@@ -65,19 +66,8 @@ public class RankingDAO {
                 ranking.setPostDate(rs.getTimestamp("postDate"));
                 ranking.setCreatorId(rs.getInt("creatorID"));
                 
-                //TODO get answerList(arrList type) from DB and set answerList by using Setter
-                PreparedStatement answerListQuery = conn.prepareStatement("select * from answerT where targetRankNo = ?");
-                answerListQuery.setInt(1, ranking.getRankingNo());
-                ResultSet rs_Answers = answerListQuery.executeQuery();
-                ArrayList<AnswerBean> answerList = new ArrayList<AnswerBean>();
-                while(rs_Answers.next()){
-                	AnswerBean answer = new AnswerBean();
-                	answer.setAnswerID(rs_Answers.getInt("answerID"));
-                	answer.setTargetRankNo(rs_Answers.getInt("targetRankNo"));
-                	answer.setResponderID(rs_Answers.getInt("responderID"));
-                	answer.setAnswer((rs_Answers.getByte("answer") == (byte)0x01));
-                	answerList.add(answer);
-                }
+                //get answer list by rankingNo
+                ArrayList<AnswerBean> answerList = getAnswerList(ranking.getRankingNo());
                 ranking.setAnswerList(answerList);
                 
                 rankArr.add(ranking);
@@ -92,12 +82,28 @@ public class RankingDAO {
 		return rankArr;
 	}
 	
-	private int getAnswerList(int targetRankingNo){
+	private ArrayList<AnswerBean> getAnswerList(int targetRankingNo) throws SQLException{
 		
-		int howManyAnswers = -1;
-		
-		
-		return howManyAnswers;
+		PreparedStatement answerListQuery = conn.prepareStatement("select * from answerT where targetRankNo = ?");
+        answerListQuery.setInt(1, targetRankingNo);
+        ResultSet rs_Answers = answerListQuery.executeQuery();
+        ArrayList<AnswerBean> answerList = new ArrayList<AnswerBean>();
+        while(rs_Answers.next()){
+        	AnswerBean answer = new AnswerBean();
+        	answer.setAnswerID(rs_Answers.getInt("answerID"));
+        	answer.setTargetRankNo(rs_Answers.getInt("targetRankNo"));
+        	answer.setResponderID(rs_Answers.getInt("responderID"));
+        	answer.setAnswer((rs_Answers.getByte("answer") == (byte)0x01));
+        	
+        	PreparedStatement getNicknameQuery = conn.prepareStatement("select nickname from userT where id=?");
+        	getNicknameQuery.setInt(1, answer.getResponderID());
+        	ResultSet rs_Nickname = getNicknameQuery.executeQuery();
+        	if(rs_Nickname.next()) answer.setNickname(rs_Nickname.getString("nickname"));
+        	
+        	
+        	answerList.add(answer);
+        }
+        return answerList;
 		
 	}
 }

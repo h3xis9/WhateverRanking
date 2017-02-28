@@ -6,6 +6,14 @@ public class AnswerBean {
 	private int targetRankNo;
 	private int responderID;
 	private boolean answer;
+	private String nickname;
+	
+	public String getNickName() {
+		return nickname;
+	}
+	public void setNickname(String nickName) {
+		this.nickname = nickName;
+	}
 	
 	public int getAnswerID() {
 		return answerID;

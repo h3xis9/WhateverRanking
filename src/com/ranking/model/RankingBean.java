@@ -14,6 +14,10 @@ public class RankingBean {
 	
 	private ArrayList<AnswerBean> answerList;
 	
+	private int answerTotal;
+	private int answerYes;
+	private int answerNo;
+	
 	
 	public RankingBean(){
 		
@@ -23,6 +27,41 @@ public class RankingBean {
 		setRankingNo(rankingNo);
 	}
 		
+	
+	/*
+	 * counting Answer tools
+	 */
+	public void initAnswerVar(){
+		answerTotal = 0;
+		answerYes = 0;
+		answerNo = 0;
+	}
+	
+	public void increaseYes(){
+		answerTotal++;
+		answerYes++;
+	}
+	
+	public void increaseNo(){
+		answerTotal++;
+		answerNo++;
+	}
+	
+	public int getAnswerTotal(){
+		return answerTotal;
+	}
+	
+	public int getAnswerYes(){
+		return answerYes;
+	}
+	
+	public int getAnswerNo(){
+		return answerNo;
+	}
+	
+	
+	
+	
 	/* getter & setter */
 	public int getRankingNo() {
 		return rankingNo;
