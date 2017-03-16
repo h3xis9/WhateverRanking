@@ -23,12 +23,34 @@ public class UserDAO {
 	}
 	
 	
-	public UserBean getUserById(String email) {
+	public UserBean getUserByEmail(String email){
 		UserBean user = new UserBean();
         try {
             PreparedStatement preparedStatement = conn.
                     prepareStatement("select * from userT where email=?");
             preparedStatement.setString(1, email);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                user.setId(rs.getInt("id"));
+                user.setEmail(rs.getString("email"));
+                user.setNickname(rs.getString("nickname"));
+                user.setAge(rs.getInt("age"));
+                user.setGender(rs.getInt("gender"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return user;
+	}
+	
+	public UserBean getUserById(int id) {
+		UserBean user = new UserBean();
+        try {
+            PreparedStatement preparedStatement = conn.
+                    prepareStatement("select * from userT where id=?");
+            preparedStatement.setInt(1, id);
             ResultSet rs = preparedStatement.executeQuery();
 
             if (rs.next()) {

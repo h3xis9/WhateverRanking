@@ -95,10 +95,14 @@ public class RankingDAO {
         	answer.setResponderID(rs_Answers.getInt("responderID"));
         	answer.setAnswer((rs_Answers.getByte("answer") == (byte)0x01));
         	
-        	PreparedStatement getNicknameQuery = conn.prepareStatement("select nickname from userT where id=?");
-        	getNicknameQuery.setInt(1, answer.getResponderID());
-        	ResultSet rs_Nickname = getNicknameQuery.executeQuery();
-        	if(rs_Nickname.next()) answer.setNickname(rs_Nickname.getString("nickname"));
+        	PreparedStatement getVarFromUserTableQuery = conn.prepareStatement("select nickname, age, gender from userT where id=?");
+        	getVarFromUserTableQuery.setInt(1, answer.getResponderID());
+        	ResultSet rs_fromUserT = getVarFromUserTableQuery.executeQuery();
+        	if(rs_fromUserT.next()){
+        		answer.setNickname(rs_fromUserT.getString("nickname"));
+        		answer.setAge(rs_fromUserT.getInt("age"));
+        		answer.setGender(rs_fromUserT.getInt("gender"));
+        	}
         	
         	
         	answerList.add(answer);

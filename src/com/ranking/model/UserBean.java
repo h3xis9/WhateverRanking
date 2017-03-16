@@ -2,15 +2,12 @@ package com.ranking.model;
 
 public class UserBean {
 
-
-
 	private int id;
+	private int gender;
+	private int age;
 	private String email;
 	private String pw;
 	private String nickname;
-
-	private int gender;
-	private int age;
 	
 	
 	//TODO should be deleted soon

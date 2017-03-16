@@ -6,7 +6,12 @@ public class AnswerBean {
 	private int targetRankNo;
 	private int responderID;
 	private boolean answer;
+	
+	//Variables from UserT
 	private String nickname;
+	private int age;
+	private int gender;
+	
 	
 	public String getNickName() {
 		return nickname;
@@ -14,6 +19,20 @@ public class AnswerBean {
 	public void setNickname(String nickName) {
 		this.nickname = nickName;
 	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+	
+	
 	
 	public int getAnswerID() {
 		return answerID;

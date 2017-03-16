@@ -1,15 +1,18 @@
+<%@page import="com.ranking.dao.DAOFactory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.*, com.ranking.model.RankingBean"%>
 <%
 	
 	String userID=null;
-	
+
 	//for checking DB status
 	//boolean ready = false;
-	
 			
 	int answerY = 0;
 	int answerN = 0;
+	
+	int genderTotal[] = new int[2];
+	int ageTotal[] = new int[5];
 			
 	int howManyRankExist = -1;
 	ArrayList<RankingBean> rankList = null;
@@ -59,6 +62,8 @@
 					out.println("<br>");
 					
 					int howManyAnswerExist = -1;
+					genderTotal = new int[2];
+					ageTotal = new int[5];
 					if(rank.getAnswerList() != null && rank.getAnswerList().size() != 0){
 						howManyAnswerExist = rank.getAnswerList().size();
 						rank.initAnswerVar();
@@ -67,17 +72,42 @@
 							//out.println(rank.getAnswerList().get(j).getNickName()+"/");
 							//out.println(rank.getAnswerList().get(j).getAnswer()+"<br>");
 							
+							
+							//Counting Yes or No
 							if(rank.getAnswerList().get(j).getAnswer() == true) rank.increaseYes();
 							else rank.increaseNo();
+							
+							
+							genderTotal[rank.getAnswerList().get(j).getGender()]++;
+							ageTotal[ ((rank.getAnswerList().get(j).getAge())-1) ]++;
+							
+							
+							out.print(rank.getAnswerList().get(j).getNickName()+" / ");
+							out.print(rank.getAnswerList().get(j).getAge()+" / ");
+							out.print(rank.getAnswerList().get(j).getGender()+"<br>");
 							
 						}
 					}
 					answerY = rank.getAnswerYes();
 					answerN = rank.getAnswerNo();
 					%>
-					
-					<!------------------------------------------------------->
 					<script>
+						var gender0 = <%= genderTotal[0]%>;
+						var gender1 = <%= genderTotal[1]%>;
+						
+						var age0 = <%= ageTotal[0]%>;
+						var age1 = <%= ageTotal[1]%>;
+						var age2 = <%= ageTotal[2]%>;
+						var age3 = <%= ageTotal[3]%>;
+						var age4 = <%= ageTotal[4]%>;
+						
+						//document.write(age0+"/");
+						//document.write(age1+"/");
+						//document.write(age2+"/");
+						//document.write(age3+"/");
+						//document.write(age4);
+						
+					
 						var answerYes = <%=answerY%>;
 						var answerNo = <%=answerN%>;
 					</script>
@@ -115,6 +145,36 @@
 						    }
 						});
 					</script>
+					<canvas id ="myChart<%=i%>_age" class="myChart"></canvas>
+					<script>
+						var ctx = document.getElementById("myChart<%=i%>_age");
+						var myChart = new Chart(ctx, {
+						    type: 'pie',
+						    data: {
+						        labels: ["10代男", "10代女", "20代男", "20代女", "30代男", "30代女"],
+						        datasets: [{
+						            data: [12, 19, 3, 5, 2, 3],
+						            backgroundColor: [
+						            	'rgba(54, 162, 235, 0.3)',
+						            	'rgba(255, 99, 132, 0.3)',
+						                'rgba(255, 206, 86, 0.3)',
+						                'rgba(75, 192, 192, 0.3)',
+						                'rgba(153, 102, 255, 0.3)',
+						                'rgba(255, 159, 64, 0.3)'
+						            ],
+						            hoverBackgroundColor: [
+						            	'rgba(54, 162, 235, 1)',
+						            	'rgba(255,99,132,1)',
+						                'rgba(255, 206, 86, 1)',
+						                'rgba(75, 192, 192, 1)',
+						                'rgba(153, 102, 255, 1)',
+						                'rgba(255, 159, 64, 1)'
+						            ]
+						        }]
+						    },
+						    options: null
+						});
+					</script>
 					</div>
 					<!------------------------------------------------------------>
 					
@@ -125,9 +185,9 @@
 			}
 			
 			%>
-			
+			<!-- 
 			<div class="container">
-				<!--
+				
 				<div class="rank_container">
 					<canvas id="myChart0" class="myChart"></canvas>
 					<script>
@@ -161,7 +221,7 @@
 					</script>
 				</div>
 				
-			 -->
+			  -->
 			 <!-- 
 				<div class="rank_container">
 					<canvas id ="myChart1" class="myChart"></canvas>

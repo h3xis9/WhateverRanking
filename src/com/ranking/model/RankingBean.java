@@ -7,11 +7,11 @@ import java.util.List;
 public class RankingBean {
 
 	private int rankingNo;
+	private int creatorId;
 	private String rankingQuestion;
 	private byte rankingReward;
-	private int creatorId;
 	private Timestamp postDate;
-	
+
 	private ArrayList<AnswerBean> answerList;
 	
 	private int answerTotal;
@@ -26,7 +26,8 @@ public class RankingBean {
 	public RankingBean(int rankingNo){
 		setRankingNo(rankingNo);
 	}
-		
+
+	
 	
 	/*
 	 * counting Answer tools
@@ -110,5 +111,6 @@ public class RankingBean {
 	public void setAnswerList(ArrayList<AnswerBean> answerList) {
 		this.answerList = answerList;
 	}
+	
 	
 }
